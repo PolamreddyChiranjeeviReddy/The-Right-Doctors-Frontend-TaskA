@@ -1,0 +1,31 @@
+<div class="card">
+  <h2>Edit Person</h2>
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <form [formGroup]="form" (ngSubmit)="save()" *ngIf="!loading">
+    <div class="form-field">
+      <label>Name</label>
+      <input formControlName="name" placeholder="Name">
+      <div *ngIf="form.controls.name.touched && form.controls.name.invalid">Name is required (min 2)</div>
+    </div>
+    <div class="form-field">
+      <label>Age</label>
+      <input type="number" formControlName="age" placeholder="Age">
+    </div>
+    <div class="form-field">
+      <label>Gender</label>
+      <select formControlName="gender">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label>Mobile</label>
+      <input formControlName="mobile" placeholder="Mobile">
+    </div>
+    <button class="btn primary" type="submit" [disabled]="form.invalid || loading">Save</button>
+    <a class="btn" routerLink="/people" style="margin-left:8px;">Cancel</a>
+  </form>
+</div>

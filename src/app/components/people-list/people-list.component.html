@@ -1,0 +1,29 @@
+<div class="card">
+  <h2>All People</h2>
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+  <table class="table" *ngIf="!loading && people && people.length">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Mobile</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of people">
+        <td>{{ p.name }}</td>
+        <td>{{ p.age || '-' }}</td>
+        <td>{{ p.gender || '-' }}</td>
+        <td>{{ p.mobile || '-' }}</td>
+        <td>
+          <a class="btn" [routerLink]="['/people', p._id, 'edit']">Edit</a>
+          <a class="btn warn" [routerLink]="['/people', p._id, 'delete']">Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="!loading && (!people || !people.length)">No people yet.</p>
+</div>
